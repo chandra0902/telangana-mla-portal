@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Telangana MLA Public Portal</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+/* ================= GLOBAL ================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+background:#f4f7fb;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+position:sticky;
+top:0;
+background:linear-gradient(90deg,#1e3c72,#2a5298);
+color:white;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+}
+
+.navbar h2{
+font-weight:600;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+margin-left:25px;
+font-weight:500;
+transition:.3s;
+}
+
+.navbar a:hover{
+color:#ffd54f;
+}
+
+/* ================= TOP LEADERS ================= */
+
+.top-leaders{
+position:absolute;
+top:80px;
+right:25px;
+display:flex;
+gap:15px;
+z-index:10;
+}
+
+.leader-mini{
+background:white;
+display:flex;
+align-items:center;
+gap:10px;
+padding:10px 12px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
+font-size:13px;
+transition:.3s;
+}
+
+.leader-mini:hover{
+transform:translateY(-3px);
+}
+
+.leader-mini img{
+width:45px;
+height:45px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.leader-mini b{
+color:#1e3c72;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+height:420px;
+
+background:
+linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url("images/assembly.jpg");
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+
+color:white;
+padding:20px;
+
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:10px;
+text-shadow:2px 2px 8px rgba(0,0,0,.7);
+}
+
+.hero p{
+width:60%;
+font-size:18px;
+margin-bottom:20px;
+text-shadow:2px 2px 6px rgba(0,0,0,.7);
+}
+
+.hero button{
+padding:12px 25px;
+border:none;
+background:#ffd54f;
+color:black;
+font-weight:600;
+border-radius:6px;
+cursor:pointer;
+transition:.3s;
+}
+
+.hero button:hover{
+transform:scale(1.05);
+}
+
+/* ================= SEARCH ================= */
+
+.search-section{
+padding:50px;
+text-align:center;
+}
+
+.search-section h2{
+margin-bottom:20px;
+color:#1e3c72;
+}
+
+.search-box{
+padding:12px;
+width:320px;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:15px;
+}
+
+.search-btn{
+padding:12px 22px;
+background:#1e3c72;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+margin-left:10px;
+transition:.3s;
+}
+
+.search-btn:hover{
+background:#122a55;
+}
+
+/* ================= FEATURES ================= */
+
+.features{
+display:flex;
+justify-content:center;
+gap:30px;
+padding:50px;
+flex-wrap:wrap;
+}
+
+.feature-card{
+background:white;
+width:260px;
+padding:30px;
+border-radius:12px;
+box-shadow:0 6px 18px rgba(0,0,0,0.1);
+text-align:center;
+transition:.3s;
+}
+
+.feature-card:hover{
+transform:translateY(-8px);
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.feature-card h3{
+color:#1e3c72;
+margin-bottom:10px;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+display:flex;
+justify-content:center;
+gap:40px;
+padding:50px;
+background:#1e3c72;
+color:white;
+flex-wrap:wrap;
+}
+
+.stat{
+text-align:center;
+}
+
+.stat h1{
+font-size:38px;
+margin-bottom:5px;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+background:#111;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:40px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+.hero p{
+width:90%;
+}
+
+.features{
+flex-direction:column;
+align-items:center;
+}
+
+.stats{
+flex-direction:column;
+}
+
+.top-leaders{
+position:static;
+justify-content:center;
+margin-top:10px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<div class="navbar">
+
+<h2>🏛 Telangana MLA Portal</h2>
+
+<div>
+
+<a href="home.html">Home</a>
+<a href="public.html">MLA Directory</a>
+<a href="login.html">Admin</a>
+
+</div>
+
+</div>
+
+<!-- ================= CM + SPEAKER ================= -->
+
+<div class="top-leaders">
+
+<div class="leader-mini">
+
+<img src="images/cm.jpg">
+
+<div>
+<b>Revanth Reddy</b><br>
+<small>Chief Minister</small>
+</div>
+
+</div>
+
+<div class="leader-mini">
+
+<img src="images/speaker.jpg">
+
+<div>
+<b>Gaddam Prasad Kumar</b><br>
+<small>Assembly Speaker</small>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ================= HERO ================= -->
+
+<div class="hero">
+
+<h1>Telangana MLA Information Portal</h1>
+
+<p>
+
+Explore Telangana MLAs, their constituency,
+performance and public service information.
+
+</p>
+
+<button onclick="window.location.href='public.html'">
+
+Explore MLAs
+
+</button>
+
+</div>
+
+
+<!-- ================= SEARCH ================= -->
+
+<div class="search-section">
+
+<h2>Search MLA by Constituency</h2>
+
+<input id="searchBox" class="search-box" placeholder="Enter Constituency">
+
+<button class="search-btn" onclick="searchMLA()">
+
+Search MLA
+
+</button>
+
+</div>
+
+
+<!-- ================= FEATURES ================= -->
+
+<div class="features">
+
+<div class="feature-card">
+
+<h3>👨‍💼 MLA Profiles</h3>
+
+<p>
+
+View complete MLA profiles including
+bio, contact information and party details.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<h3>📊 Performance</h3>
+
+<p>
+
+Track MLA performance like attendance,
+development funds and public rating.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<h3>📍 Constituency Search</h3>
+
+<p>
+
+Search MLAs easily by constituency
+and explore Telangana political map.
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ================= STATS ================= -->
+
+<div class="stats">
+
+<div class="stat">
+
+<h1>119</h1>
+
+<p>Total MLAs</p>
+
+</div>
+
+<div class="stat">
+
+<h1>33</h1>
+
+<p>Districts</p>
+
+</div>
+
+<div class="stat">
+
+<h1>10+</h1>
+
+<p>Political Parties</p>
+
+</div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<div class="footer">
+
+<p>© 2026 Telangana MLA Public Information Portal</p>
+
+<p>Developed by <b>Polkam Chandrakanth</b></p>
+
+</div>
+
+
+<script>
+
+function searchMLA(){
+
+let constituency = document.getElementById("searchBox").value.trim();
+
+if(constituency === ""){
+alert("Please enter constituency");
+return;
+}
+
+/* ✅ PASS SEARCH TO NEXT PAGE */
+window.location.href = "public.html?search=" + encodeURIComponent(constituency);
+
+}
+
+/* ENTER KEY SUPPORT */
+document.getElementById("searchBox").addEventListener("keypress",function(e){
+if(e.key==="Enter"){
+searchMLA();
+}
+});
+
+</script>
+
+
+</body>
+</html>
