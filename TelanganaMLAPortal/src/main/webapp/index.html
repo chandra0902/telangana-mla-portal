@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Telangana MLA Admin Panel</title>
+
+<link rel="stylesheet" href="css/enterprise.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="navbar">
+Telangana MLA Management System
+<a href="logout" class="logout">Logout</a>
+</div>
+
+<div class="wrapper">
+
+<div class="sidebar">
+
+<h3>ADMIN PANEL</h3>
+
+<a onclick="showPage('dashboard')" id="menu-dashboard" class="active">Dashboard</a> <a onclick="showPage('manage')" id="menu-manage">Manage MLAs</a> <a href="public.html">Public Portal</a>
+
+</div>
+
+<div class="content">
+
+<div id="dashboard" class="page"></div>
+<div id="manage" class="page hidden"></div>
+
+</div>
+
+</div>
+
+<script src="js/app.js"></script>
+
+<script src="js/dashboard.js"></script>
+
+<script src="js/manage.js"></script>
+
+</body>
+</html>

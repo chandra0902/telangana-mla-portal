@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+      version="5.0">
+
+<!-- ================= LOGIN ================= -->
+
+<servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.telangana.servlet.LoginServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/adminLogin</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.telangana.servlet.LogoutServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+</servlet-mapping>
+
+
+<!-- ================= MLA CRUD ================= -->
+
+<servlet>
+    <servlet-name>AddMlaServlet</servlet-name>
+    <servlet-class>com.telangana.servlet.AddMlaServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>AddMlaServlet</servlet-name>
+    <url-pattern>/addMla</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>UpdateMlaServlet</servlet-name>
+    <servlet-class>com.telangana.servlet.UpdateMlaServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>UpdateMlaServlet</servlet-name>
+    <url-pattern>/updateMla</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>DeleteMlaServlet</servlet-name>
+    <servlet-class>com.telangana.servlet.DeleteMlaServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>DeleteMlaServlet</servlet-name>
+    <url-pattern>/deleteMla</url-pattern>
+</servlet-mapping>
+
+
+<!-- ================= MLA VIEW ================= -->
+
+<servlet>
+    <servlet-name>ViewMlaServlet</servlet-name>
+    <servlet-class>com.telangana.servlet.ViewMlaServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ViewMlaServlet</servlet-name>
+    <url-pattern>/viewMla</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+    <servlet-name>MlaDetailsServlet</servlet-name>
+    <servlet-class>com.telangana.servlet.MlaDetailsServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>MlaDetailsServlet</servlet-name>
+    <url-pattern>/mlaDetails</url-pattern>
+</servlet-mapping>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<servlet>
+    <servlet-name>DashboardDataServlet</servlet-name>
+    <servlet-class>com.telangana.servlet.DashboardDataServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>DashboardDataServlet</servlet-name>
+    <url-pattern>/dashboardData</url-pattern>
+</servlet-mapping>
+
+
+<!-- ================= FILTER ================= -->
+
+<filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>com.telangana.filter.AuthFilter</filter-class>
+</filter>
+
+<filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+</filter-mapping>
+
+
+<!-- ================= WELCOME PAGE ================= -->
+
+ <welcome-file-list>
+   		 <welcome-file>home.html</welcome-file>
+	</welcome-file-list>
+
+
+</web-app>
