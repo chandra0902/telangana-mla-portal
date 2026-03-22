@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Admin Login</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(120deg,#1e3c72,#2a5298);
+}
+
+/* LOGIN BOX */
+
+.login-box{
+background:white;
+padding:40px;
+border-radius:10px;
+width:350px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.login-box h2{
+margin-bottom:20px;
+text-align:center;
+color:#1e3c72;
+}
+
+/* INPUTS */
+
+.login-box input{
+width:100%;
+padding:10px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+/* BUTTON */
+
+.login-box button{
+width:100%;
+padding:10px;
+background:#1e3c72;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.login-box button:hover{
+background:#122a55;
+}
+
+/* BACK LINK */
+
+.back{
+display:block;
+text-align:center;
+margin-top:10px;
+text-decoration:none;
+color:#1e3c72;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>Admin Login</h2>
+
+<form action="adminLogin" method="post">
+
+<input type="text"
+name="username"
+placeholder="Username"
+required>
+
+<input type="password"
+name="password"
+placeholder="Password"
+required>
+
+<button type="submit">
+Login
+</button>
+
+</form>
+
+<a class="back" href="home.html">
+⬅ Back to Home
+</a>
+
+</div>
+
+</body>
+</html>
