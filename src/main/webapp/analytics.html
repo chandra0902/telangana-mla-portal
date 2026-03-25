@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MLA Analytics</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{font-family:Arial;background:#f1f5f9}
+
+.header{
+background:#1e3a8a;color:white;padding:15px;
+display:flex;justify-content:space-between
+}
+
+.container{padding:20px}
+
+/* STATS */
+.stats{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;margin-bottom:20px
+}
+.stat{
+background:white;padding:20px;border-radius:10px;text-align:center
+}
+
+/* LEADERBOARD */
+.board{
+background:white;padding:20px;border-radius:10px;margin-bottom:20px
+}
+.rank{
+padding:10px;border-bottom:1px solid #eee
+}
+
+/* CHARTS */
+.charts{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px
+}
+.chart-box{
+background:white;padding:15px;border-radius:10px
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h2>📊 MLA Analytics Dashboard</h2>
+<a href="home.html" style="color:white">Home</a>
+</div>
+
+<div class="container">
+
+<!-- STATS -->
+<div class="stats">
+<div class="stat">Total MLAs<br><b id="total"></b></div>
+<div class="stat">Avg Rating<br><b id="avg"></b></div>
+<div class="stat">Top MLA<br><b id="top"></b></div>
+<div class="stat">Avg Attendance<br><b id="attendance"></b></div>
+</div>
+
+<!-- LEADERBOARD -->
+<div class="board">
+<h3>🏆 Top Performers</h3>
+<div id="leader"></div>
+</div>
+
+<!-- CHARTS -->
+<div class="charts">
+
+<div class="chart-box">
+<h4>Party Distribution</h4>
+<canvas id="partyChart"></canvas>
+</div>
+
+<div class="chart-box">
+<h4>Attendance</h4>
+<canvas id="attChart"></canvas>
+</div>
+
+<div class="chart-box">
+<h4>Questions Raised</h4>
+<canvas id="qChart"></canvas>
+</div>
+
+<div class="chart-box">
+<h4>Development Funds</h4>
+<canvas id="fundChart"></canvas>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let data=[];
+
+/* LOAD DATA */
+function load(){
+fetch('viewMla').then(r=>r.json()).then(d=>{
+data=d;
+render();
+charts();
+});
+}
+
+/* RENDER DATA */
+function render(){
+
+document.getElementById('total').innerText=data.length;
+
+/* AVG RATING */
+let avg = data.reduce((a,b)=>a+(b.rating||0),0)/data.length;
+document.getElementById('avg').innerText=avg.toFixed(2);
+
+/* AVG ATTENDANCE */
+let att = data.reduce((a,b)=>a+(b.attendance||0),0)/data.length;
+document.getElementById('attendance').innerText=att.toFixed(1);
+
+/* SORT BY SMART SCORE */
+let sorted=[...data].sort((a,b)=>score(b)-score(a));
+
+document.getElementById('top').innerText=sorted[0]?.name;
+
+/* LEADERBOARD */
+let html='';
+sorted.slice(0,5).forEach((m,i)=>{
+html+=`
+<div class="rank">
+${i+1}. ${m.name} ⭐ ${m.rating}
+</div>`;
+});
+
+leader.innerHTML=html;
+}
+
+/* SMART SCORE */
+function score(m){
+return (
+(m.rating||0)*40 +
+(m.attendance||0)*0.2 +
+(m.questions||0)*0.2 +
+(m.funds||0)/1000000*0.2
+);
+}
+
+/* CHARTS */
+function charts(){
+
+/* PARTY */
+let party={};
+data.forEach(m=>party[m.party]=(party[m.party]||0)+1);
+
+new Chart(partyChart,{
+type:'pie',
+data:{labels:Object.keys(party),datasets:[{data:Object.values(party)}]}
+});
+
+/* ATTENDANCE */
+new Chart(attChart,{
+type:'bar',
+data:{
+labels:data.map(m=>m.name),
+datasets:[{label:'Attendance',data:data.map(m=>m.attendance||0)}]
+}
+});
+
+/* QUESTIONS */
+new Chart(qChart,{
+type:'bar',
+data:{
+labels:data.map(m=>m.name),
+datasets:[{label:'Questions',data:data.map(m=>m.questions||0)}]
+}
+});
+
+/* FUNDS */
+new Chart(fundChart,{
+type:'bar',
+data:{
+labels:data.map(m=>m.name),
+datasets:[{label:'Funds',data:data.map(m=>m.funds||0)}]
+}
+});
+
+}
+
+window.onload=load;
+
+</script>
+
+</body>
+</html>

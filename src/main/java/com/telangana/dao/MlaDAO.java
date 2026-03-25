@@ -11,8 +11,6 @@ import com.telangana.util.DBConnection;
 
 public class MlaDAO {
 
-    /* ================= ADD MLA ================= */
-
     public void addMla(Mla mla) {
 
         String sql = "INSERT INTO mla(name,age,party,constituency,photo,party_logo,bio,contact,email,twitter) VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -40,8 +38,6 @@ public class MlaDAO {
         }
     }
 
-    /* ================= GET ALL MLAs ================= */
-
     public List<Mla> getAllMla() {
 
         List<Mla> list = new ArrayList<>();
@@ -50,7 +46,11 @@ public class MlaDAO {
 
             Connection con = DBConnection.getConnection();
 
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM mla");
+            // ⭐ UPDATED QUERY (JOIN ADDED)
+            PreparedStatement ps = con.prepareStatement(
+                "SELECT m.*, p.public_rating FROM mla m " +
+                "LEFT JOIN mla_performance p ON m.id = p.mla_id"
+            );
 
             ResultSet rs = ps.executeQuery();
 
@@ -70,6 +70,9 @@ public class MlaDAO {
                 m.setEmail(rs.getString("email"));
                 m.setTwitter(rs.getString("twitter"));
 
+                // ⭐ NEW LINE
+                m.setRating(rs.getDouble("public_rating"));
+
                 list.add(m);
             }
 
@@ -80,26 +83,16 @@ public class MlaDAO {
         return list;
     }
 
-    /* ================= DELETE MLA ================= */
-
     public void deleteMla(int id) {
-
         try {
-
             Connection con = DBConnection.getConnection();
-
             PreparedStatement ps = con.prepareStatement("DELETE FROM mla WHERE id=?");
-
             ps.setInt(1, id);
-
             ps.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    /* ================= GET MLA BY ID ================= */
 
     public Mla getMlaById(int id) {
 
@@ -108,9 +101,7 @@ public class MlaDAO {
         try {
 
             Connection con = DBConnection.getConnection();
-
             PreparedStatement ps = con.prepareStatement("SELECT * FROM mla WHERE id=?");
-
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
@@ -130,7 +121,6 @@ public class MlaDAO {
                 m.setContact(rs.getString("contact"));
                 m.setEmail(rs.getString("email"));
                 m.setTwitter(rs.getString("twitter"));
-
             }
 
         } catch (Exception e) {
@@ -140,8 +130,6 @@ public class MlaDAO {
         return m;
     }
 
-    /* ================= UPDATE MLA ================= */
-
     public void updateMla(Mla mla) {
 
         try {
@@ -149,7 +137,6 @@ public class MlaDAO {
             Connection con = DBConnection.getConnection();
 
             PreparedStatement ps = con.prepareStatement(
-
                     "UPDATE mla SET name=?,age=?,party=?,constituency=?,bio=?,contact=?,email=?,twitter=? WHERE id=?");
 
             ps.setString(1, mla.getName());
@@ -168,5 +155,4 @@ public class MlaDAO {
             e.printStackTrace();
         }
     }
-
 }

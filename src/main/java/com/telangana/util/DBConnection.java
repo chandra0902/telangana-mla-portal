@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 
 public class DBConnection {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/telangana_mla_portal";
+    private static final String URL = "jdbc:mysql://centerbeam.proxy.rlwy.net:45065/railway"
+            + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+
     private static final String USER = "root";
-    private static final String PASSWORD = "chinn@09";
+    private static final String PASSWORD = "ZmrTARijRwfNprATyhfXVYIPrWYCOXOF";
 
     public static Connection getConnection() {
 
@@ -19,11 +21,13 @@ public class DBConnection {
 
             con = DriverManager.getConnection(URL, USER, PASSWORD);
 
+            System.out.println("✅ DB Connected Successfully");
+
         } 
         catch (Exception e) {
 
-            System.out.println("Database Connection Error: " + e.getMessage());
-
+            System.out.println("❌ Database Connection Error: " + e.getMessage());
+            e.printStackTrace();
         }
 
         return con;

@@ -322,7 +322,7 @@ partyFilter.innerHTML='<option value="">Party</option>';
 dSet.forEach(x=>districtFilter.innerHTML+=`<option>${x}</option>`);
 pSet.forEach(x=>partyFilter.innerHTML+=`<option>${x}</option>`);
 
-/* MAP BUTTONS (AUTO) */
+/* MAP BUTTONS */
 
 let mapHTML = `<button onclick="resetAll()">🌐 All Telangana</button>`;
 
@@ -351,6 +351,9 @@ let partial=mlaList.filter(m=>m.constituency.toLowerCase().includes(filter)&&m.c
 list=[...exact,...partial];
 }
 
+/* ✅ SORT BY CONSTITUENCY NUMBER */
+list.sort((a, b) => a.constituency_no - b.constituency_no);
+
 let html="";
 
 list.forEach(m=>{
@@ -363,7 +366,8 @@ html+=`
 <div class="mla-card">
 
 <div class="photo-wrapper">
-<img class="mla-photo" src="${photo}" onerror="this.onerror=null;this.src='uploads/default.png'">
+<img class="mla-photo" src="${photo}" 
+onerror="this.onerror=null;this.src='uploads/default.png'">
 </div>
 
 <h3>${m.name}</h3>
@@ -372,7 +376,9 @@ html+=`
 ${m.party}
 </div>
 
-<p>📍 <b>${highlight(m.constituency)}</b></p>
+<!-- ✅ SHOW NUMBER -->
+<p>📍 <b>${m.constituency_no}. ${highlight(m.constituency)}</b></p>
+
 <p>🗺 ${m.district}</p>
 
 <a class="view-btn" href="mlaDetails?id=${m.id}">

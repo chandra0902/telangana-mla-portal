@@ -1,471 +1,250 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<title>Telangana MLA Public Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telangana MLA Portal</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-
-/* ================= GLOBAL ================= */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Segoe UI;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
 
 body{
-background:#f4f7fb;
-}
-
-/* ================= NAVBAR ================= */
-
-.navbar{
-position:sticky;
-top:0;
-background:linear-gradient(90deg,#1e3c72,#2a5298);
-color:white;
-padding:15px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:1000;
-}
-
-.navbar h2{
-font-weight:600;
-}
-
-.navbar a{
-color:white;
-text-decoration:none;
-margin-left:25px;
-font-weight:500;
-transition:.3s;
-}
-
-.navbar a:hover{
-color:#ffd54f;
-}
-
-/* ================= TOP LEADERS ================= */
-
-.top-leaders{
-position:absolute;
-top:80px;
-right:25px;
-display:flex;
-gap:15px;
-z-index:10;
-}
-
-.leader-mini{
-background:white;
-display:flex;
-align-items:center;
-gap:10px;
-padding:10px 12px;
-border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.15);
-font-size:13px;
-transition:.3s;
-}
-
-.leader-mini:hover{
-transform:translateY(-3px);
-}
-
-.leader-mini img{
-width:45px;
-height:45px;
-border-radius:50%;
-object-fit:cover;
-}
-
-.leader-mini b{
-color:#1e3c72;
-}
-
-/* ================= HERO ================= */
-
-.hero{
-
-height:420px;
-
 background:
-linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-url("images/assembly.jpg");
-
+linear-gradient(rgba(241,245,249,0.92), rgba(241,245,249,0.95)),
+url('images/assembly.jpg');
 background-size:cover;
 background-position:center;
-
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-
-color:white;
-padding:20px;
-
+background-attachment:fixed;
+color:#0f172a
 }
 
-.hero h1{
-font-size:42px;
-margin-bottom:10px;
-text-shadow:2px 2px 8px rgba(0,0,0,.7);
+/* DARK MODE */
+.dark{
+background:#020617 !important;
+color:#e2e8f0 !important;
+}
+.dark .navbar{background:#020617}
+.dark .table-box,.dark .chart-box,.dark .feature,.dark .search-box{
+background:#0f172a;color:#e2e8f0
 }
 
-.hero p{
-width:60%;
-font-size:18px;
-margin-bottom:20px;
-text-shadow:2px 2px 6px rgba(0,0,0,.7);
+/* NAVBAR */
+.navbar{
+background:#0f172a;color:white;padding:16px 40px;
+display:flex;justify-content:space-between;align-items:center;
+position:sticky;top:0;z-index:1000
 }
+.navbar a{color:#cbd5f5;margin-left:20px;text-decoration:none}
+.navbar a:hover{color:white}
 
+/* HERO */
+.hero{
+padding:80px 20px;text-align:center;
+background:
+linear-gradient(rgba(30,58,138,0.85), rgba(99,102,241,0.9)),
+url('images/assembly.jpg');
+background-size:cover;
+background-position:center;
+color:white
+}
+.hero h1{font-size:48px}
 .hero button{
-padding:12px 25px;
-border:none;
-background:#ffd54f;
-color:black;
-font-weight:600;
-border-radius:6px;
-cursor:pointer;
-transition:.3s;
+padding:14px 30px;border:none;border-radius:999px;
+background:white;color:#1e3a8a;font-weight:600
 }
 
-.hero button:hover{
-transform:scale(1.05);
+/* ACTIONS */
+.actions{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;max-width:1100px;margin:-40px auto 40px;padding:0 20px
 }
-
-/* ================= SEARCH ================= */
-
-.search-section{
-padding:50px;
-text-align:center;
+.action-card{
+background:white;padding:25px;border-radius:16px;text-align:center;
+cursor:pointer;transition:0.3s
 }
+.action-card:hover{transform:translateY(-8px)}
 
-.search-section h2{
-margin-bottom:20px;
-color:#1e3c72;
-}
-
-.search-box{
-padding:12px;
-width:320px;
-border-radius:6px;
-border:1px solid #ccc;
-font-size:15px;
-}
-
-.search-btn{
-padding:12px 22px;
-background:#1e3c72;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-margin-left:10px;
-transition:.3s;
-}
-
-.search-btn:hover{
-background:#122a55;
-}
-
-/* ================= FEATURES ================= */
-
-.features{
-display:flex;
-justify-content:center;
-gap:30px;
-padding:50px;
-flex-wrap:wrap;
-}
-
-.feature-card{
-background:white;
-width:260px;
-padding:30px;
-border-radius:12px;
-box-shadow:0 6px 18px rgba(0,0,0,0.1);
-text-align:center;
-transition:.3s;
-}
-
-.feature-card:hover{
-transform:translateY(-8px);
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
-}
-
-.feature-card h3{
-color:#1e3c72;
-margin-bottom:10px;
-}
-
-/* ================= STATS ================= */
-
+/* STATS */
 .stats{
-display:flex;
-justify-content:center;
-gap:40px;
-padding:50px;
-background:#1e3c72;
-color:white;
-flex-wrap:wrap;
+display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;padding:20px;max-width:1100px;margin:auto
 }
-
 .stat{
-text-align:center;
+padding:20px;border-radius:14px;color:white;cursor:pointer
+}
+.s1{background:#ef4444}
+.s2{background:#3b82f6}
+.s3{background:#22c55e}
+
+/* SEARCH */
+.search-box{
+background:white;padding:20px;border-radius:16px;
+max-width:900px;margin:20px auto;
+display:flex;gap:10px
+}
+.search-box input{flex:1;padding:10px}
+
+/* GRID */
+.main{
+display:grid;grid-template-columns:2fr 1fr;gap:20px;
+max-width:1100px;margin:auto;padding:20px
 }
 
-.stat h1{
-font-size:38px;
-margin-bottom:5px;
-}
+/* TABLE */
+.table-box{background:white;border-radius:16px;padding:15px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;border-bottom:1px solid #eee}
+th{background:#1e3a8a;color:white}
+tr:hover{background:#f1f5f9;cursor:pointer}
 
-/* ================= FOOTER ================= */
+/* CHART */
+.chart-box{background:white;border-radius:16px;padding:15px}
 
-.footer{
-background:#111;
-color:white;
-text-align:center;
-padding:25px;
-margin-top:40px;
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:900px){
-
-.hero p{
-width:90%;
-}
-
-.features{
-flex-direction:column;
-align-items:center;
-}
-
-.stats{
-flex-direction:column;
-}
-
-.top-leaders{
-position:static;
-justify-content:center;
-margin-top:10px;
-}
-
-}
+/* FOOTER */
+.footer{text-align:center;padding:30px;background:#0f172a;color:white;margin-top:40px}
 
 </style>
-
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
-
+<!-- NAVBAR -->
 <div class="navbar">
-
 <h2>🏛 Telangana MLA Portal</h2>
-
 <div>
-
-<a href="home.html">Home</a>
-<a href="public.html">MLA Directory</a>
-<a href="login.html">Admin</a>
-
+<a href="#">Home</a>
+<a href="public.html">Directory</a>
+<a href="analytics.html">Analytics</a>
+<a href="login.html">🔐 Login</a>
+<a href="#" onclick="toggleDark()">🌙</a>
+</div>
 </div>
 
-</div>
-
-<!-- ================= CM + SPEAKER ================= -->
-
-<div class="top-leaders">
-
-<div class="leader-mini">
-
-<img src="images/cm.jpg">
-
-<div>
-<b>Revanth Reddy</b><br>
-<small>Chief Minister</small>
-</div>
-
-</div>
-
-<div class="leader-mini">
-
-<img src="images/speaker.jpg">
-
-<div>
-<b>Gaddam Prasad Kumar</b><br>
-<small>Assembly Speaker</small>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- ================= HERO ================= -->
-
+<!-- HERO -->
 <div class="hero">
-
-<h1>Telangana MLA Information Portal</h1>
-
-<p>
-
-Explore Telangana MLAs, their constituency,
-performance and public service information.
-
-</p>
-
-<button onclick="window.location.href='public.html'">
-
-Explore MLAs
-
-</button>
-
+<h1>Explore Telangana MLAs</h1>
+<button onclick="goDir()">Start Exploring</button>
 </div>
 
-
-<!-- ================= SEARCH ================= -->
-
-<div class="search-section">
-
-<h2>Search MLA by Constituency</h2>
-
-<input id="searchBox" class="search-box" placeholder="Enter Constituency">
-
-<button class="search-btn" onclick="searchMLA()">
-
-Search MLA
-
-</button>
-
+<!-- ACTIONS -->
+<div class="actions">
+<div class="action-card" onclick="goDir()">📋 Browse MLAs</div>
+<div class="action-card" onclick="focusSearch()">🔍 Search MLA</div>
+<div class="action-card" onclick="goDash()">📊 Analytics</div>
 </div>
 
-
-<!-- ================= FEATURES ================= -->
-
-<div class="features">
-
-<div class="feature-card">
-
-<h3>👨‍💼 MLA Profiles</h3>
-
-<p>
-
-View complete MLA profiles including
-bio, contact information and party details.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<h3>📊 Performance</h3>
-
-<p>
-
-Track MLA performance like attendance,
-development funds and public rating.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<h3>📍 Constituency Search</h3>
-
-<p>
-
-Search MLAs easily by constituency
-and explore Telangana political map.
-
-</p>
-
-</div>
-
-</div>
-
-
-<!-- ================= STATS ================= -->
-
+<!-- STATS -->
 <div class="stats">
+<div class="stat s1" onclick="goDir()">Total MLAs<br><b id="mlaCount">0</b></div>
+<div class="stat s2" onclick="goDash()">Parties<br><b id="partyCount">0</b></div>
+<div class="stat s3" onclick="goDash()">Districts<br><b id="districtCount">0</b></div>
+</div>
 
-<div class="stat">
+<!-- SEARCH -->
+<div class="search-box">
+<input id="searchBox" placeholder="Search constituency">
+<button onclick="searchMLA()">Search</button>
+</div>
 
-<h1>119</h1>
+<!-- MAIN -->
+<div class="main">
 
-<p>Total MLAs</p>
+<div class="table-box">
+<h3>Top 5 MLAs</h3>
+<table>
+<thead>
+<tr><th>Name</th><th>Party</th><th>Constituency</th><th>Rating</th></tr>
+</thead>
+<tbody id="mlaTable"></tbody>
+</table>
+</div>
+
+<div class="chart-box">
+<h3>Party Distribution</h3>
+<canvas id="chart"></canvas>
+</div>
 
 </div>
 
-<div class="stat">
-
-<h1>33</h1>
-
-<p>Districts</p>
-
-</div>
-
-<div class="stat">
-
-<h1>10+</h1>
-
-<p>Political Parties</p>
-
-</div>
-
-</div>
-
-
-<!-- ================= FOOTER ================= -->
-
-<div class="footer">
-
-<p>© 2026 Telangana MLA Public Information Portal</p>
-
-<p>Developed by <b>Polkam Chandrakanth</b></p>
-
-</div>
-
+<div class="footer">© Telangana MLA Portal</div>
 
 <script>
+let data=[];
 
-function searchMLA(){
+function goDir(){window.location.href='public.html'}
 
-let constituency = document.getElementById("searchBox").value.trim();
+/* ✅ FIXED HERE */
+function goDash(){window.location.href='analytics.html'}
 
-if(constituency === ""){
-alert("Please enter constituency");
-return;
+function focusSearch(){document.getElementById('searchBox').focus()}
+
+function toggleDark(){document.body.classList.toggle('dark')}
+
+function load(){
+fetch('viewMla').then(r=>r.json()).then(d=>{
+data=d;
+render();
+chart();
+});
 }
 
-/* ✅ PASS SEARCH TO NEXT PAGE */
-window.location.href = "public.html?search=" + encodeURIComponent(constituency);
+function render(){
+let parties={},districts={},html='';
 
-}
-
-/* ENTER KEY SUPPORT */
-document.getElementById("searchBox").addEventListener("keypress",function(e){
-if(e.key==="Enter"){
-searchMLA();
-}
+data.forEach(m=>{
+parties[m.party]=(parties[m.party]||0)+1;
+districts[m.district]=(districts[m.district]||0)+1;
 });
 
-</script>
+mlaCount.innerText=data.length;
+partyCount.innerText=Object.keys(parties).length;
+districtCount.innerText=Object.keys(districts).length;
 
+let sorted=[...data].sort((a,b)=> (b.rating||0)-(a.rating||0)).slice(0,5);
+
+sorted.forEach(m=>{
+html+=`<tr onclick="viewDetails(${m.id})">
+<td>${m.name}</td>
+<td>${m.party}</td>
+<td>${m.constituency}</td>
+<td>⭐ ${m.rating||0}</td>
+</tr>`;
+});
+
+mlaTable.innerHTML=html;
+}
+
+function viewDetails(id){
+window.location.href='mlaDetails?id='+id;
+}
+
+function chart(){
+let count={};
+data.forEach(m=>count[m.party]=(count[m.party]||0)+1);
+
+new Chart(document.getElementById('chart'),{
+type:'doughnut',
+data:{
+labels:Object.keys(count),
+datasets:[{data:Object.values(count)}]
+}
+});
+}
+
+function searchMLA(){
+let v=searchBox.value;
+window.location.href='public.html?search='+encodeURIComponent(v);
+}
+
+searchBox.addEventListener('keypress',e=>{
+if(e.key==='Enter') searchMLA();
+});
+
+window.onload=load;
+</script>
 
 </body>
 </html>

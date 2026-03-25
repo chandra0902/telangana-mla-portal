@@ -13,64 +13,68 @@ import com.telangana.util.DBConnection;
 
 public class ViewMlaServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
-throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-response.setContentType("application/json");
+        response.setContentType("application/json");
 
-PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
 
-try{
+        try {
 
-Connection con = DBConnection.getConnection();
+            Connection con = DBConnection.getConnection();
+            Statement st = con.createStatement();
 
-Statement st = con.createStatement();
+            // ⭐ UPDATED QUERY (JOIN)
+            ResultSet rs = st.executeQuery(
+                    "SELECT m.*, p.public_rating FROM mla m " +
+                    "LEFT JOIN mla_performance p ON m.id = p.mla_id"
+            );
 
-ResultSet rs = st.executeQuery("SELECT * FROM mla");
+            StringBuilder json = new StringBuilder();
+            json.append("[");
 
-StringBuilder json = new StringBuilder();
-json.append("[");
+            boolean first = true;
 
-boolean first=true;
+            while (rs.next()) {
 
-while(rs.next()){
+                if (!first) {
+                    json.append(",");
+                }
 
-if(!first){
-json.append(",");
-}
+                String photo = rs.getString("photo");
+                if (photo == null) {
+                    photo = "";
+                }
 
-String photo = rs.getString("photo");
+                double rating = rs.getDouble("public_rating"); // ⭐ NEW
 
-if(photo==null){
-photo="";
-}
+                json.append("{");
+                json.append("\"id\":").append(rs.getInt("id")).append(",");
+                json.append("\"name\":\"").append(rs.getString("name")).append("\",");
+                json.append("\"party\":\"").append(rs.getString("party")).append("\",");
+                json.append("\"constituency\":\"").append(rs.getString("constituency")).append("\",");
 
-json.append("{");
-json.append("\"id\":").append(rs.getInt("id")).append(",");
-json.append("\"name\":\"").append(rs.getString("name")).append("\",");
-json.append("\"party\":\"").append(rs.getString("party")).append("\",");
-json.append("\"constituency\":\"").append(rs.getString("constituency")).append("\",");
+                json.append("\"district\":\"").append(rs.getString("district")).append("\",");
 
-/* ✅ ADD THIS LINE */
-json.append("\"district\":\"").append(rs.getString("district")).append("\",");
+                // ⭐ NEW FIELD
+                json.append("\"rating\":").append(rating).append(",");
 
-json.append("\"photo\":\"").append(photo).append("\"");
+                json.append("\"photo\":\"").append(photo).append("\"");
 
-json.append("}");
+                json.append("}");
 
-first=false;
+                first = false;
+            }
 
-}
+            json.append("]");
 
-json.append("]");
+            out.print(json.toString());
 
-out.print(json.toString());
-
-}catch(Exception e){
-e.printStackTrace();
-}
-
-}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
