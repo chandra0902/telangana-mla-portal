@@ -101,8 +101,9 @@
 </servlet-mapping>
 
 
-<!-- ================= FILTER ================= -->
+<!-- ================= FILTER DISABLED ================= -->
 
+<!--
 <filter>
     <filter-name>AuthFilter</filter-name>
     <filter-class>com.telangana.filter.AuthFilter</filter-class>
@@ -112,13 +113,14 @@
     <filter-name>AuthFilter</filter-name>
     <url-pattern>/admin/*</url-pattern>
 </filter-mapping>
+-->
+
 
 
 <!-- ================= WELCOME PAGE ================= -->
 
- <welcome-file-list>
-   		 <welcome-file>home.html</welcome-file>
-	</welcome-file-list>
-
+<welcome-file-list>
+    <welcome-file>home.html</welcome-file>
+</welcome-file-list>
 
 </web-app>
