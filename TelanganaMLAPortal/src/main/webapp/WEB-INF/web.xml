@@ -103,7 +103,7 @@
 
 <!-- ================= FILTER DISABLED ================= -->
 
-<!--
+
 <filter>
     <filter-name>AuthFilter</filter-name>
     <filter-class>com.telangana.filter.AuthFilter</filter-class>
@@ -113,7 +113,7 @@
     <filter-name>AuthFilter</filter-name>
     <url-pattern>/admin/*</url-pattern>
 </filter-mapping>
--->
+
 
 
 
