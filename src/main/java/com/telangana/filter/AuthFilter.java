@@ -1,7 +1,6 @@
 package com.telangana.filter;
 
 import java.io.IOException;
-
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 
@@ -15,8 +14,8 @@ public class AuthFilter implements Filter {
 
         String uri = req.getRequestURI();
 
-        // ✅ Allow public pages
-        if (uri.contains("login") || uri.contains("home") || uri.contains("viewMla")) {
+        // ✅ Allow public pages (VERY IMPORTANT)
+        if (uri.contains("login") || uri.contains("home") || uri.contains("viewMla") || uri.contains(".css") || uri.contains(".js")) {
             chain.doFilter(request, response);
             return;
         }
